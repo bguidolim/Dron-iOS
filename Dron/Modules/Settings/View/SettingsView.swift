@@ -70,7 +70,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
     func setupRequirementsSection() {
 
         countrySelectorRow.configure { row in
-                row.text = "settings.country.row.label".localized()
+            row.text = "settings.country.row.label".localized()
             }.onSelected {[weak self] row in
                 row.cellUpdate({ $0.setSelected(false, animated: true) })
                 self?.presenter?.countryRowDidSelect()
