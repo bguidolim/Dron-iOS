@@ -22,11 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
 
-        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-            .subscribe({ _ in
-                print("Resource count \(RxSwift.Resources.total)")
-            })
-
         VPN.manager.start()
         UIApplication.shared.setMinimumBackgroundFetchInterval(60)
 
