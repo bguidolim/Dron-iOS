@@ -65,7 +65,7 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
                 return obj1.load < obj2.load
             }).first {
                 VPN.manager.connectToBestServer(bestServer,
-                                                backgroundAction: false)
+                                                killSwitchEnabled: settings.killSwitch)
             }
         }).disposed(by: disposeBag)
     }

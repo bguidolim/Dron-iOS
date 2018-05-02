@@ -13,3 +13,9 @@
 "settings.password.row.text.placeholder" = "Ask every time";
 "settings.country.row.label" = "Country";
 "settings.country.row.value" = "Select a country to connect";
+"settings.killswitch.row.label" = "Kill Switch";
+
+"vpn.status.disconnected" = "Connect";
+"vpn.status.disconnecting" = "Disconnecting";
+"vpn.status.connecting" = "Connecting";
+"vpn.status.connected" = "Connected";

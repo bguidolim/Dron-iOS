@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         VPN.manager.start()
-        UIApplication.shared.setMinimumBackgroundFetchInterval(60)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(30)
 
         guard let settingsViewController = SettingsWireframe.configureViewController() else {
             return false

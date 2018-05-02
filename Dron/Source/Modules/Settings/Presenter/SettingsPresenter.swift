@@ -32,13 +32,13 @@ class SettingsPresenter: SettingsPresenterProtocol, SettingsInteractorOutputProt
     func connectionStatusReceived(_ status: NEVPNStatus) {
         switch status {
         case .connected:
-            self.view?.setConnectionStatus(text: "Connected".localized(), value: true)
+            self.view?.setConnectionStatus(text: "vpn.status.connected".localized(), value: true)
         case .connecting, .reasserting:
-            self.view?.setConnectionStatus(text: "Connecting".localized(), value: true)
+            self.view?.setConnectionStatus(text: "vpn.status.connecting".localized(), value: true)
         case .disconnected, .invalid:
-            self.view?.setConnectionStatus(text: "Connect".localized(), value: false)
+            self.view?.setConnectionStatus(text: "vpn.status.disconnected".localized(), value: false)
         case .disconnecting:
-            self.view?.setConnectionStatus(text: "Disconnecting".localized(), value: true)
+            self.view?.setConnectionStatus(text: "vpn.status.disconnecting".localized(), value: true)
         }
     }
 
