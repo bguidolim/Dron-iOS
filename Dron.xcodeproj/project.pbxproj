@@ -10,7 +10,16 @@
 		37011C3A208375DA00079A6C /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37011C39208375DA00079A6C /* VPNManager.swift */; };
 		37011C432083778D00079A6C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37011C422083778D00079A6C /* NetworkExtension.framework */; };
 		37011C632083821200079A6C /* Former.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37011C622083821200079A6C /* Former.framework */; };
-		37011C6C2083C36600079A6C /* TextSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37011C6B2083C36600079A6C /* TextSelectorViewController.swift */; };
+		371D89A62099FD3000923FD0 /* SettingsLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89952099FD3000923FD0 /* SettingsLocalDataManager.swift */; };
+		371D89A72099FD3000923FD0 /* SettingsAPIDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89972099FD3000923FD0 /* SettingsAPIDataManager.swift */; };
+		371D89A82099FD3000923FD0 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89992099FD3000923FD0 /* SettingsPresenter.swift */; };
+		371D89A92099FD3000923FD0 /* SettingsWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D899B2099FD3000923FD0 /* SettingsWireFrame.swift */; };
+		371D89AA2099FD3000923FD0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D899D2099FD3000923FD0 /* SettingsView.swift */; };
+		371D89AB2099FD3000923FD0 /* SettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D899F2099FD3000923FD0 /* SettingsProtocols.swift */; };
+		371D89AC2099FD3000923FD0 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89A12099FD3000923FD0 /* SettingsInteractor.swift */; };
+		371D89AD2099FD3000923FD0 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89A22099FD3000923FD0 /* SettingsItem.swift */; };
+		371D89AE2099FD3000923FD0 /* TextSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89A42099FD3000923FD0 /* TextSelectorViewController.swift */; };
+		371D89AF2099FD3000923FD0 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89A52099FD3000923FD0 /* NavigationController.swift */; };
 		373E9D7820815EA5008067C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373E9D7720815EA5008067C5 /* AppDelegate.swift */; };
 		373E9D7F20815EA6008067C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373E9D7E20815EA6008067C5 /* Assets.xcassets */; };
 		373E9D8220815EA6008067C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 373E9D8020815EA6008067C5 /* LaunchScreen.storyboard */; };
@@ -25,15 +34,6 @@
 		37626C03209669540033AB57 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37626C02209669540033AB57 /* KeychainManager.swift */; };
 		37E3E8ED2090BB440041A6D6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E8EB2090BB430041A6D6 /* RxSwift.framework */; };
 		37E3E8EE2090BB440041A6D6 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E8EC2090BB430041A6D6 /* RxCocoa.framework */; };
-		37E3E9142095CEB60041A6D6 /* SettingsLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9052095CEB60041A6D6 /* SettingsLocalDataManager.swift */; };
-		37E3E9152095CEB60041A6D6 /* SettingsAPIDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9072095CEB60041A6D6 /* SettingsAPIDataManager.swift */; };
-		37E3E9162095CEB60041A6D6 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9092095CEB60041A6D6 /* SettingsPresenter.swift */; };
-		37E3E9172095CEB60041A6D6 /* SettingsWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E90B2095CEB60041A6D6 /* SettingsWireFrame.swift */; };
-		37E3E9192095CEB60041A6D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E90E2095CEB60041A6D6 /* SettingsView.swift */; };
-		37E3E91A2095CEB60041A6D6 /* SettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9102095CEB60041A6D6 /* SettingsProtocols.swift */; };
-		37E3E91B2095CEB60041A6D6 /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9122095CEB60041A6D6 /* SettingsInteractor.swift */; };
-		37E3E91C2095CEB60041A6D6 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9132095CEB60041A6D6 /* SettingsItem.swift */; };
-		37E3E91F2095CFDA0041A6D6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E91E2095CFDA0041A6D6 /* NavigationController.swift */; };
 		37E3E9222095D2060041A6D6 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9212095D2060041A6D6 /* String+Extensions.swift */; };
 		37E3E9242095D4EB0041A6D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E3E9232095D4EB0041A6D6 /* Localizable.strings */; };
 		37E3E9262095E2B80041A6D6 /* Default.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E9252095E2B80041A6D6 /* Default.framework */; };
@@ -44,7 +44,16 @@
 		37011C3F2083772200079A6C /* Dron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dron.entitlements; sourceTree = "<group>"; };
 		37011C422083778D00079A6C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		37011C622083821200079A6C /* Former.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Former.framework; path = Carthage/Build/iOS/Former.framework; sourceTree = SOURCE_ROOT; };
-		37011C6B2083C36600079A6C /* TextSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSelectorViewController.swift; sourceTree = "<group>"; };
+		371D89952099FD3000923FD0 /* SettingsLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLocalDataManager.swift; sourceTree = "<group>"; };
+		371D89972099FD3000923FD0 /* SettingsAPIDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAPIDataManager.swift; sourceTree = "<group>"; };
+		371D89992099FD3000923FD0 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		371D899B2099FD3000923FD0 /* SettingsWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWireFrame.swift; sourceTree = "<group>"; };
+		371D899D2099FD3000923FD0 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		371D899F2099FD3000923FD0 /* SettingsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProtocols.swift; sourceTree = "<group>"; };
+		371D89A12099FD3000923FD0 /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
+		371D89A22099FD3000923FD0 /* SettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		371D89A42099FD3000923FD0 /* TextSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectorViewController.swift; sourceTree = "<group>"; };
+		371D89A52099FD3000923FD0 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		373E9D7420815EA5008067C5 /* Dron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		373E9D7720815EA5008067C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		373E9D7E20815EA6008067C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,15 +70,6 @@
 		37626C02209669540033AB57 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		37E3E8EB2090BB430041A6D6 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = SOURCE_ROOT; };
 		37E3E8EC2090BB430041A6D6 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = SOURCE_ROOT; };
-		37E3E9052095CEB60041A6D6 /* SettingsLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLocalDataManager.swift; sourceTree = "<group>"; };
-		37E3E9072095CEB60041A6D6 /* SettingsAPIDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAPIDataManager.swift; sourceTree = "<group>"; };
-		37E3E9092095CEB60041A6D6 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
-		37E3E90B2095CEB60041A6D6 /* SettingsWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWireFrame.swift; sourceTree = "<group>"; };
-		37E3E90E2095CEB60041A6D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		37E3E9102095CEB60041A6D6 /* SettingsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProtocols.swift; sourceTree = "<group>"; };
-		37E3E9122095CEB60041A6D6 /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
-		37E3E9132095CEB60041A6D6 /* SettingsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
-		37E3E91E2095CFDA0041A6D6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		37E3E9212095D2060041A6D6 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		37E3E9232095D4EB0041A6D6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		37E3E9252095E2B80041A6D6 /* Default.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Default.framework; path = Carthage/Build/iOS/Default.framework; sourceTree = SOURCE_ROOT; };
@@ -95,16 +95,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		37011C182083723C00079A6C /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E91D2095CFBF0041A6D6 /* Base */,
-				37E3E9022095CEB60041A6D6 /* Settings */,
-			);
-			name = Modules;
-			path = Dron/Modules;
-			sourceTree = SOURCE_ROOT;
-		};
 		37011C35208372E600079A6C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +112,103 @@
 				37011C39208375DA00079A6C /* VPNManager.swift */,
 			);
 			path = VPN;
+			sourceTree = "<group>";
+		};
+		371D89912099FD3000923FD0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				371D89922099FD3000923FD0 /* Settings */,
+				371D89A32099FD3000923FD0 /* Base */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		371D89922099FD3000923FD0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				371D89932099FD3000923FD0 /* DataManager */,
+				371D89982099FD3000923FD0 /* Presenter */,
+				371D899A2099FD3000923FD0 /* WireFrame */,
+				371D899C2099FD3000923FD0 /* View */,
+				371D899E2099FD3000923FD0 /* Protocols */,
+				371D89A02099FD3000923FD0 /* Interactor */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		371D89932099FD3000923FD0 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				371D89942099FD3000923FD0 /* Local */,
+				371D89962099FD3000923FD0 /* API */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		371D89942099FD3000923FD0 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				371D89952099FD3000923FD0 /* SettingsLocalDataManager.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		371D89962099FD3000923FD0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				371D89972099FD3000923FD0 /* SettingsAPIDataManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		371D89982099FD3000923FD0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				371D89992099FD3000923FD0 /* SettingsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		371D899A2099FD3000923FD0 /* WireFrame */ = {
+			isa = PBXGroup;
+			children = (
+				371D899B2099FD3000923FD0 /* SettingsWireFrame.swift */,
+			);
+			path = WireFrame;
+			sourceTree = "<group>";
+		};
+		371D899C2099FD3000923FD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				371D899D2099FD3000923FD0 /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		371D899E2099FD3000923FD0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				371D899F2099FD3000923FD0 /* SettingsProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		371D89A02099FD3000923FD0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				371D89A12099FD3000923FD0 /* SettingsInteractor.swift */,
+				371D89A22099FD3000923FD0 /* SettingsItem.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		371D89A32099FD3000923FD0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				371D89A42099FD3000923FD0 /* TextSelectorViewController.swift */,
+				371D89A52099FD3000923FD0 /* NavigationController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		373E9D6B20815EA5008067C5 = {
@@ -174,7 +261,7 @@
 				373E9DCB208353AF008067C5 /* API */,
 				37E3E9202095D1E60041A6D6 /* Extensions */,
 				37626C01209669470033AB57 /* Keychain */,
-				37011C182083723C00079A6C /* Modules */,
+				371D89912099FD3000923FD0 /* Modules */,
 				373E9DB720816546008067C5 /* Networking */,
 				37011C38208375CC00079A6C /* VPN */,
 			);
@@ -205,94 +292,6 @@
 				37626C02209669540033AB57 /* KeychainManager.swift */,
 			);
 			path = Keychain;
-			sourceTree = "<group>";
-		};
-		37E3E9022095CEB60041A6D6 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9032095CEB60041A6D6 /* DataManager */,
-				37E3E9082095CEB60041A6D6 /* Presenter */,
-				37E3E90A2095CEB60041A6D6 /* WireFrame */,
-				37E3E90C2095CEB60041A6D6 /* View */,
-				37E3E90F2095CEB60041A6D6 /* Protocols */,
-				37E3E9112095CEB60041A6D6 /* Interactor */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		37E3E9032095CEB60041A6D6 /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9042095CEB60041A6D6 /* Local */,
-				37E3E9062095CEB60041A6D6 /* API */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
-		37E3E9042095CEB60041A6D6 /* Local */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9052095CEB60041A6D6 /* SettingsLocalDataManager.swift */,
-			);
-			path = Local;
-			sourceTree = "<group>";
-		};
-		37E3E9062095CEB60041A6D6 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9072095CEB60041A6D6 /* SettingsAPIDataManager.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		37E3E9082095CEB60041A6D6 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9092095CEB60041A6D6 /* SettingsPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		37E3E90A2095CEB60041A6D6 /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E90B2095CEB60041A6D6 /* SettingsWireFrame.swift */,
-			);
-			path = WireFrame;
-			sourceTree = "<group>";
-		};
-		37E3E90C2095CEB60041A6D6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E90E2095CEB60041A6D6 /* SettingsView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		37E3E90F2095CEB60041A6D6 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9102095CEB60041A6D6 /* SettingsProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		37E3E9112095CEB60041A6D6 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				37E3E9122095CEB60041A6D6 /* SettingsInteractor.swift */,
-				37E3E9132095CEB60041A6D6 /* SettingsItem.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		37E3E91D2095CFBF0041A6D6 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				37011C6B2083C36600079A6C /* TextSelectorViewController.swift */,
-				37E3E91E2095CFDA0041A6D6 /* NavigationController.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		37E3E9202095D1E60041A6D6 /* Extensions */ = {
@@ -428,24 +427,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37011C6C2083C36600079A6C /* TextSelectorViewController.swift in Sources */,
 				373E9D7820815EA5008067C5 /* AppDelegate.swift in Sources */,
-				37E3E9142095CEB60041A6D6 /* SettingsLocalDataManager.swift in Sources */,
-				37E3E91B2095CEB60041A6D6 /* SettingsInteractor.swift in Sources */,
 				373E9DBB20816582008067C5 /* SessionManager.swift in Sources */,
+				371D89AB2099FD3000923FD0 /* SettingsProtocols.swift in Sources */,
 				373E9DCF20835479008067C5 /* Models.swift in Sources */,
-				37E3E9172095CEB60041A6D6 /* SettingsWireFrame.swift in Sources */,
 				37626C03209669540033AB57 /* KeychainManager.swift in Sources */,
 				373E9DB92081655F008067C5 /* HTTPProtocols.swift in Sources */,
+				371D89A92099FD3000923FD0 /* SettingsWireFrame.swift in Sources */,
 				37011C3A208375DA00079A6C /* VPNManager.swift in Sources */,
-				37E3E91F2095CFDA0041A6D6 /* NavigationController.swift in Sources */,
-				37E3E9152095CEB60041A6D6 /* SettingsAPIDataManager.swift in Sources */,
-				37E3E9192095CEB60041A6D6 /* SettingsView.swift in Sources */,
+				371D89AC2099FD3000923FD0 /* SettingsInteractor.swift in Sources */,
+				371D89A62099FD3000923FD0 /* SettingsLocalDataManager.swift in Sources */,
+				371D89A82099FD3000923FD0 /* SettingsPresenter.swift in Sources */,
+				371D89A72099FD3000923FD0 /* SettingsAPIDataManager.swift in Sources */,
 				37E3E9222095D2060041A6D6 /* String+Extensions.swift in Sources */,
+				371D89AF2099FD3000923FD0 /* NavigationController.swift in Sources */,
+				371D89AE2099FD3000923FD0 /* TextSelectorViewController.swift in Sources */,
+				371D89AD2099FD3000923FD0 /* SettingsItem.swift in Sources */,
 				373E9DC020817ABA008067C5 /* APIClient.swift in Sources */,
-				37E3E91A2095CEB60041A6D6 /* SettingsProtocols.swift in Sources */,
-				37E3E9162095CEB60041A6D6 /* SettingsPresenter.swift in Sources */,
-				37E3E91C2095CEB60041A6D6 /* SettingsItem.swift in Sources */,
+				371D89AA2099FD3000923FD0 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
