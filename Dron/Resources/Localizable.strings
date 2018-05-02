@@ -1,0 +1,15 @@
+/* 
+  Localizables.strings
+  Dron
+
+  Created by Bruno Guidolim on 29.04.18.
+  Copyright © 2018 Bruno Guidolim. All rights reserved.
+*/
+
+"settings.connect.row.label" = "Connect";
+"settings.username.row.label" = "Username";
+"settings.username.row.text.placeholder" = "Username";
+"settings.password.row.label" = "Password";
+"settings.password.row.text.placeholder" = "Ask every time";
+"settings.country.row.label" = "Country";
+"settings.country.row.value" = "Select a country to connect";
