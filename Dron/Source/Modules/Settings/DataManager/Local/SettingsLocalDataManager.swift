@@ -12,8 +12,9 @@ private struct CountryList: Codable {
 }
 
 private struct DefaultKeys {
-     static let CountryListKey = "CountryList"
-     static let SelectedCountryKey = "SelectedCountry"
+    static let CountryListKey = "CountryList"
+    static let SelectedCountryKey = "SelectedCountry"
+    static let KillSwitchKey = "KillSwitchEnabled"
 }
 
 final class SettingsLocalDataManager: SettingsLocalDataManagerInputProtocol {
@@ -30,12 +31,15 @@ final class SettingsLocalDataManager: SettingsLocalDataManagerInputProtocol {
         if let country = settings.country {
             UserDefaults.standard.set(country, forKey: DefaultKeys.SelectedCountryKey)
         }
+        UserDefaults.standard.set(settings.killSwitch, forKey: DefaultKeys.KillSwitchKey)
     }
 
     func getSettings() -> SettingsItem {
         return SettingsItem(username: KeychainManager.username(),
                             password: KeychainManager.password(),
-                            country: UserDefaults.standard.string(forKey: DefaultKeys.SelectedCountryKey))
+                            country: UserDefaults.standard.string(forKey: DefaultKeys.SelectedCountryKey),
+                            killSwitch: UserDefaults.standard.bool(forKey: DefaultKeys.KillSwitchKey)
+        )
     }
 
     func getCountries() -> [Country]? {

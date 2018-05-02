@@ -10,12 +10,15 @@ struct SettingsItem {
     let username: String?
     let password: String?
     let country: String?
+    let killSwitch: Bool
 
     init(username: String? = nil,
          password: String? = nil,
-         country: String? = nil) {
+         country: String? = nil,
+         killSwitch: Bool = false) {
         self.username = username
         self.password = password
         self.country = country
+        self.killSwitch = killSwitch
     }
 }

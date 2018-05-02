@@ -14,6 +14,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
     private let usernameRow = TextFieldRowFormer<FormTextFieldCell>()
     private let passwordRow = TextFieldRowFormer<FormTextFieldCell>()
     private let countrySelectorRow = LabelRowFormer<FormLabelCell>()
+    private let killSwitchRow = SwitchRowFormer<FormSwitchCell>()
 
     private let disposeBag = DisposeBag()
 
@@ -22,7 +23,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
 
         setupConnectSection()
         setupUserSection()
-        setupRequirementsSection()
+        setupOptionsSection()
 
         presenter?.viewDidLoadEvent()
     }
@@ -31,17 +32,19 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
         usernameRow.text = item?.username ?? ""
         passwordRow.text = item?.password ?? ""
         countrySelectorRow.subText = item?.country ?? "settings.country.row.value".localized()
+        killSwitchRow.switched = item?.killSwitch ?? false
     }
 
     func setupConnectSection() {
         connectRow.configure { row in
             row.cell.titleLabel.text = "settings.connect.row.label".localized()
             row.switchWhenSelected = true
-            }.onSwitchChanged { [weak self] value in
-                let item = SettingsItem(username: self?.usernameRow.text,
-                                        password: self?.passwordRow.text,
-                                        country: self?.countrySelectorRow.subText)
-                self?.presenter?.connectSwitchDidChange(with: item, value: value)
+            }.onSwitchChanged { [unowned self] value in
+                let item = SettingsItem(username: self.usernameRow.text,
+                                        password: self.passwordRow.text,
+                                        country: self.countrySelectorRow.subText,
+                                        killSwitch: self.killSwitchRow.switched)
+                self.presenter?.connectSwitchDidChange(with: item, value: value)
         }
 
         let section = SectionFormer(rowFormers: [connectRow])
@@ -66,7 +69,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
         former.append(sectionFormer: section)
     }
 
-    func setupRequirementsSection() {
+    func setupOptionsSection() {
 
         countrySelectorRow.configure { row in
             row.text = "settings.country.row.label".localized()
@@ -75,7 +78,12 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
                 self?.presenter?.countryRowDidSelect()
         }
 
-        let section = SectionFormer(rowFormers: [countrySelectorRow])
+        killSwitchRow.configure { row in
+            row.cell.titleLabel.text = "settings.killswitch.row.label".localized()
+            row.switchWhenSelected = true
+        }
+
+        let section = SectionFormer(rowFormers: [countrySelectorRow, killSwitchRow])
         former.append(sectionFormer: section)
     }
 

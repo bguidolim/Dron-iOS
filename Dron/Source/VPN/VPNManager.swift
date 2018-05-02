@@ -63,7 +63,6 @@ final class VPN {
     private func save(_ configuration: NEVPNProtocolIKEv2) -> Observable<Any?> {
         vpnManager.localizedDescription = "Dron"
         vpnManager.isEnabled = true
-        vpnManager.isOnDemandEnabled = true
 
         configuration.useExtendedAuthentication = true
         configuration.disconnectOnSleep = false
@@ -80,6 +79,21 @@ final class VPN {
             })
             return Disposables.create()
         })
+    }
+
+    private func configureKillSwitch(enabled: Bool) {
+        vpnManager.isOnDemandEnabled = enabled
+        if enabled {
+            let wifiRule = NEOnDemandRuleConnect()
+            wifiRule.interfaceTypeMatch = .wiFi
+
+            let cellularRule = NEOnDemandRuleConnect()
+            cellularRule.interfaceTypeMatch = .cellular
+
+            vpnManager.onDemandRules = [wifiRule, cellularRule]
+        } else {
+            vpnManager.onDemandRules = nil
+        }
     }
 
     private func connect() -> Observable<Any?> {
@@ -110,7 +124,9 @@ final class VPN {
             .disposed(by: disposeBag)
     }
 
-    func connectToBestServer(_ server: Server, backgroundAction: Bool) {
+    func connectToBestServer(_ server: Server,
+                             killSwitchEnabled: Bool = false,
+                             backgroundAction: Bool = false) {
         if let currentServer = self.currentServer,
             vpnManager.connection.status == .connected {
             if server.domain != currentServer {
@@ -129,12 +145,18 @@ final class VPN {
         configuration.username = KeychainManager.username()
         configuration.passwordReference = KeychainManager.passwordRef()
 
+        if !backgroundAction {
+            configureKillSwitch(enabled: killSwitchEnabled)
+        }
+
         UserDefaults.standard.set(server.domain, forKey: DefaultKeys.CurrentServer)
         VPN.manager.connect(with: configuration)
     }
 
     func disconnect() {
         isConnecting = false
+        configureKillSwitch(enabled: false)
+        vpnManager.saveToPreferences()
         vpnManager.connection.stopVPNTunnel()
     }
 }
