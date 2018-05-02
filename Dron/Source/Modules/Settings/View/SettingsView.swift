@@ -4,7 +4,6 @@
 //
 
 import Former
-import RxCocoa
 import RxSwift
 
 final class SettingsView: FormViewController, SettingsViewProtocol {
