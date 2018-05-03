@@ -1,4 +1,5 @@
 # Dron - iOS
+[![Build Status](https://img.shields.io/bitrise/a6f934e4abf71b48/development.svg?token=xg7WJE6eekaJ-a2XfIB9vA)](https://www.bitrise.io/app/a6f934e4abf71b48)
 
 Lightweight alternative to connect on NordVPN servers on iOS
 
