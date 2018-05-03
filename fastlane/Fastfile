@@ -19,8 +19,6 @@ platform :ios do
     )
     gym
     crashlytics(
-      api_token: 'd3ed57c3de5c35d0d313b4da1f33fc435edcae2e',
-      build_secret: '16343bfcfb68d1aa6f2f95c5afe61206ccd8a3f21499c4a97c3c8ed7d877fe44',
       groups: 'ios-beta'
     )
   end
