@@ -1,0 +1,27 @@
+default_platform(:ios)
+
+platform :ios do
+  desc 'Build and deploy to Crashlytics Beta'
+  lane :alpha do
+    carthage(
+      platform: 'iOS',
+      cache_builds: true
+    )
+    cert
+    sigh
+    increment_build_number(
+      build_number: ENV['BITRISE_BUILD_NUMBER']
+    )
+    add_badge(
+      alpha: true,
+      shield: "#{get_version_number}-#{get_build_number}-orange",
+      shield_io_timeout: 60
+    )
+    gym
+    crashlytics(
+      api_token: 'd3ed57c3de5c35d0d313b4da1f33fc435edcae2e',
+      build_secret: '16343bfcfb68d1aa6f2f95c5afe61206ccd8a3f21499c4a97c3c8ed7d877fe44',
+      groups: 'ios-beta'
+    )
+  end
+end
