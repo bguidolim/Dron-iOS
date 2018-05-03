@@ -1,1 +1,2 @@
 clean(true)
+export_method('app-store')
