@@ -1,2 +1,0 @@
-git_url("git@bitbucket.org:bguidolim/match-assets.git")
-type("appstore")
