@@ -15,21 +15,22 @@ platform :ios do
 
   desc 'Build and deploy to Crashlytics Beta'
   lane :alpha do
-    carthage(
-      platform: 'iOS',
-      cache_builds: true
-    )
-    increment_build_number(
-      build_number: ENV['BITRISE_BUILD_NUMBER']
-    )
-    add_badge(
-      alpha: true,
-      shield: "Build-#{get_build_number}-orange",
-      glob: '/Dron/**/*.appiconset/*.{png,PNG}'
-    )
-    gym
-    crashlytics(
-      groups: 'ios-beta'
-    )
+    # carthage(
+    #   platform: 'iOS',
+    #   cache_builds: true
+    # )
+    match
+    # increment_build_number(
+    #   build_number: ENV['BITRISE_BUILD_NUMBER']
+    # )
+    # add_badge(
+    #   alpha: true,
+    #   shield: "Build-#{get_build_number}-orange",
+    #   glob: '/Dron/**/*.appiconset/*.{png,PNG}'
+    # )
+    # gym
+    # crashlytics(
+    #   groups: 'ios-beta'
+    # )
   end
 end
