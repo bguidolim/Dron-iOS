@@ -3,6 +3,17 @@ default_platform(:ios)
 ENV['FASTLANE_USER'] = 'bruno@guidolim.com'
 
 platform :ios do
+
+  before_all do
+    xcversion(version: "9.3")
+    ensure_git_status_clean
+  end
+
+  after_all do
+    clean_build_artifacts
+    reset_git_repo(force: true)
+  end
+
   desc 'Build and deploy to Crashlytics Beta'
   lane :alpha do
     carthage(
