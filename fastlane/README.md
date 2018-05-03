@@ -16,9 +16,9 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios beta
+### ios alpha
 ```
-fastlane ios beta
+fastlane ios alpha
 ```
 Build and deploy to Crashlytics Beta
 

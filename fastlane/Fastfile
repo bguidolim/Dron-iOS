@@ -1,5 +1,7 @@
 default_platform(:ios)
 
+ENV['FASTLANE_USER'] = 'bruno@guidolim.com'
+
 platform :ios do
   desc 'Build and deploy to Crashlytics Beta'
   lane :alpha do
@@ -14,8 +16,8 @@ platform :ios do
     )
     add_badge(
       alpha: true,
-      shield: "#{get_version_number}-#{get_build_number}-orange",
-      shield_io_timeout: 60
+      shield: "Build-#{get_build_number}-orange",
+      glob: '/Dron/**/*.appiconset/*.{png,PNG}'
     )
     gym
     crashlytics(
