@@ -9,8 +9,7 @@ platform :ios do
       platform: 'iOS',
       cache_builds: true
     )
-    cert
-    sigh
+    match
     increment_build_number(
       build_number: ENV['BITRISE_BUILD_NUMBER']
     )
