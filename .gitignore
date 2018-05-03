@@ -15,6 +15,7 @@ Carthage/Build
 
 # fastlane specific
 fastlane/report.xml
+.bundle
 
 # deliver temporary files
 fastlane/Preview.html
