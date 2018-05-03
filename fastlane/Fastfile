@@ -1,7 +1,5 @@
 default_platform(:ios)
 
-ENV['FASTLANE_USER'] = 'bruno@guidolim.com'
-
 platform :ios do
   before_all do
     xcversion(version: '9.3')
@@ -19,12 +17,13 @@ platform :ios do
       platform: 'iOS',
       cache_builds: true
     )
+    match
     automatic_code_signing(
       use_automatic_signing: false,
-      code_sign_identity: 'iPhone Distribution',
-      team_id: 'JW682CU4GW'
+      profile_name: ENV['sigh_com.guidolim.Dron_appstore_profile-name'],
+      team_id: 'JW682CU4GW',
+      code_sign_identity: 'iPhone Distribution'
     )
-    match(force: true)
     increment_build_number(
       build_number: ENV['BITRISE_BUILD_NUMBER']
     )
