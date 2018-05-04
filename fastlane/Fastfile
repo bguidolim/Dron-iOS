@@ -30,19 +30,21 @@ platform :ios do
       build_number: latest_testflight_build_number(version: version_number) + 1
     )
     add_badge(
-      alpha: true,
       shield: "Build-#{get_build_number}-orange",
       glob: '/Dron/**/*.appiconset/*.{png,PNG}'
     )
     gym
-    pilot
-    download_dsyms(
-      version: version_number,
-      build_number: get_build_number
+    pilot(
+      skip_waiting_for_build_processing: true # temp
     )
-    upload_symbols_to_crashlytics(
-      binary_path: './Scripts/upload-symbols',
-      dsym_worker_threads: 15
-    )
+    # Disabled temporarily
+    # download_dsyms(
+    #   version: version_number,
+    #   build_number: get_build_number
+    # )
+    # upload_symbols_to_crashlytics(
+    #   binary_path: './Scripts/upload-symbols',
+    #   dsym_worker_threads: 15
+    # )
   end
 end
