@@ -40,6 +40,9 @@ platform :ios do
       version: version_number,
       build_number: get_build_number
     )
-    upload_symbols_to_crashlytics
+    upload_symbols_to_crashlytics(
+      binary_path: './Scripts/upload-symbols',
+      dsym_worker_threads: 15
+    )
   end
 end
