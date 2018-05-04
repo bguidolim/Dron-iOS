@@ -10,7 +10,10 @@ platform :ios do
 
   after_all do
     clean_build_artifacts
-    reset_git_repo
+    reset_git_repo(
+      force: true,
+      skip_clean: true
+    )
   end
 
   desc 'Build and deploy to TestFlight for Beta Testing'
