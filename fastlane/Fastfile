@@ -25,8 +25,9 @@ platform :ios do
       team_id: 'JW682CU4GW',
       code_sign_identity: 'iPhone Distribution'
     )
+    version_number = get_version_number
     increment_build_number(
-      build_number: ENV['BITRISE_BUILD_NUMBER']
+      build_number: latest_testflight_build_number(version: version_number) + 1
     )
     add_badge(
       alpha: true,
@@ -36,7 +37,7 @@ platform :ios do
     gym
     pilot
     download_dsyms(
-      version: get_version_number,
+      version: version_number,
       build_number: get_build_number
     )
     upload_symbols_to_crashlytics
