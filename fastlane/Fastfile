@@ -38,9 +38,7 @@ platform :ios do
       glob: '/Dron/**/*.appiconset/*.{png,PNG}'
     )
     gym
-    pilot(
-      skip_waiting_for_build_processing: true # temp
-    )
+    pilot
     download_dsyms(
       version: version_number,
       build_number: get_build_number
