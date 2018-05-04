@@ -37,7 +37,13 @@ platform :ios do
       glob: '/Dron/**/*.appiconset/*.{png,PNG}'
     )
     gym
-    pilot
+    pilot(
+      distribute_external: true,
+      notify_external_testers: true,
+      groups: ['ios-beta-external'],
+      changelog: 'This is an automated build, so there is no "What to Test". '\
+                  'Just play around and let me know if you find any issue.'
+    )
     download_dsyms(
       version: version_number,
       build_number: get_build_number
