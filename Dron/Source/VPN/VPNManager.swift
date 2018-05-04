@@ -8,8 +8,7 @@
 
 import Foundation
 import NetworkExtension
-import RxSwift
-import RxCocoa
+import then
 
 private struct DefaultKeys {
     static let CurrentServer = "CurrentServer"
@@ -26,41 +25,47 @@ final class VPN {
     private var isConnecting = false
     private let vpnManager = NEVPNManager.shared()
     private let apiClient = NordAPIClient()
-    private let disposeBag = DisposeBag()
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func start() {
-        load()
-            .subscribe({ [unowned self] _ in
-                NotificationCenter.default.rx.notification(Notification.Name.NEVPNStatusDidChange)
-                    .subscribe(onNext: { [unowned self] notification in
-                        guard let obj = notification.object as? NEVPNConnection else {
-                            return
-                        }
-                        if obj.status == .disconnected {
-                            if self.isConnecting {
-                                try? obj.startVPNTunnel()
-                            }
-                        }
-                    }).disposed(by: self.disposeBag)
-            })
-            .disposed(by: disposeBag)
+        load().then { _ in
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.vpnStatusDidChange(_:)),
+                                                   name: .NEVPNStatusDidChange,
+                                                   object: nil)
+            }.onError { error in
+                // TODO
+                print(error.localizedDescription)
+        }
     }
 
-    private func load() -> Observable<Any?> {
-        return Observable.create({ observer -> Disposable in
-            self.vpnManager.loadFromPreferences(completionHandler: { error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(nil))
-                    observer.on(.completed)
-                }
-            })
-            return Disposables.create()
+    @objc private func vpnStatusDidChange(_ notification: Notification) {
+        guard let obj = notification.object as? NEVPNConnection else {
+            return
+        }
+        if obj.status == .disconnected {
+            if self.isConnecting {
+                try? obj.startVPNTunnel()
+            }
+        }
+    }
+
+    private func load() -> Promise<Any?> {
+        let promise = Promise<Any?>()
+        vpnManager.loadFromPreferences(completionHandler: { error in
+            guard let error = error else {
+                promise.fulfill(nil)
+                return
+            }
+            promise.reject(error)
         })
+        return promise
     }
 
-    private func save(_ configuration: NEVPNProtocolIKEv2) -> Observable<Any?> {
+    private func save(_ configuration: NEVPNProtocolIKEv2) -> Promise<Any?> {
         vpnManager.localizedDescription = "Dron"
         vpnManager.isEnabled = true
 
@@ -68,17 +73,15 @@ final class VPN {
         configuration.disconnectOnSleep = false
         vpnManager.protocolConfiguration = configuration
 
-        return Observable.create({ observer -> Disposable in
-            self.vpnManager.saveToPreferences(completionHandler: { error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(nil))
-                    observer.on(.completed)
-                }
-            })
-            return Disposables.create()
+        let promise = Promise<Any?>()
+        vpnManager.saveToPreferences(completionHandler: { error in
+            guard let error = error else {
+                promise.fulfill(nil)
+                return
+            }
+            promise.reject(error)
         })
+        return promise
     }
 
     private func configureKillSwitch(enabled: Bool) {
@@ -96,32 +99,24 @@ final class VPN {
         }
     }
 
-    private func connect() -> Observable<Any?> {
-        return Observable.create({ [weak self] observer -> Disposable in
-            do {
-                try self?.vpnManager.connection.startVPNTunnel()
-                observer.on(.next(nil))
-                observer.on(.completed)
-            } catch {
-                observer.on(.error(error))
-            }
-            return Disposables.create {
-                self?.vpnManager.connection.stopVPNTunnel()
-            }
-        })
+    private func connect() -> Promise<Any?> {
+        let promise = Promise<Any?>()
+        do {
+            promise.fulfill(try vpnManager.connection.startVPNTunnel())
+        } catch {
+            promise.reject(error)
+        }
+        return promise
     }
 
     private func connect(with configuration: NEVPNProtocolIKEv2) {
         isConnecting = true
         save(configuration)
-            .flatMap({ [unowned self] _ in
-                self.connect()
-            })
-            .subscribe(onError: { (error) in
+            .then(connect())
+            .onError { error in
                 // TODO
                 print(error.localizedDescription)
-            })
-            .disposed(by: disposeBag)
+        }
     }
 
     func connectToBestServer(_ server: Server,

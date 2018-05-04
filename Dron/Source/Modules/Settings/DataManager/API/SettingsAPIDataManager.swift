@@ -4,14 +4,14 @@
 //
 
 import Foundation
-import RxSwift
+import then
 
 class SettingsAPIDataManager: SettingsAPIDataManagerInputProtocol {
     init() {}
 
     let api = NordAPIClient()
 
-    func getServers() -> Observable<[Server]> {
+    func getServers() -> Promise<[Server]> {
         return api.request(Server.Resource.getServers)
     }
 }

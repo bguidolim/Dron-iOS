@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RxSwift
+import then
 
 struct HTTPTarget<R: HTTPResource>: HTTPTargetProtocol {
     let baseURL: URL?
@@ -43,20 +43,26 @@ public protocol HTTPTargetProtocol {
 // MARK: Extensions
 
 public extension HTTPClient {
-    private func request<T: HTTPTargetProtocol>(_ target: T) -> Observable<Data> {
+    private func request<T: HTTPTargetProtocol>(_ target: T) -> Promise<Data> {
         return manager.request(url: target.URL,
                                method: target.resource.method,
                                params: target.resource.parameters,
                                useCache: target.resource.useCache)
     }
 
-    public func request<R: HTTPResource, T: Decodable>(_ resource: R) -> Observable<T> {
+    public func request<R: HTTPResource, T: Decodable>(_ resource: R) -> Promise<T> {
         let target = HTTPTarget(baseURL: baseURL, resource: resource)
-        return request(target).map { data -> T in
+        let promise = Promise<T>()
+        request(target).then { data in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            return try decoder.decode(T.self, from: data)
+            do {
+                promise.fulfill(try decoder.decode(T.self, from: data))
+            } catch {
+                promise.reject(error)
+            }
         }
+        return promise
     }
 }
 

@@ -1,4 +1,4 @@
 github "Nirma/Default" "2.1.0"
-github "ReactiveX/RxSwift" "4.1.2"
+github "freshOS/then" "4.0.0"
 github "kishikawakatsumi/KeychainAccess" "v3.1.1"
 github "ra1028/Former" "1.6.1"

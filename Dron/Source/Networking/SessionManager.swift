@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RxSwift
+import then
 
 // MARK: - Definitions
 
@@ -23,7 +23,7 @@ public typealias Parameters = Any
 
 private struct TaskCompletion {
     let taskId: Int?
-    let observer: AnyObserver<Data>
+    let promise: Promise<Data>
     let useCache: Bool
     var responseData: Data
 }
@@ -53,30 +53,27 @@ public final class SessionManager: NSObject {
     func request(url: URL?,
                  method: HTTPMethod,
                  params: Parameters?,
-                 useCache: Bool) -> Observable<Data> {
+                 useCache: Bool) -> Promise<Data> {
 
         guard let url = url else {
-            return Observable.error(SessionManagerError.invalidURL)
+            return Promise.reject(SessionManagerError.invalidURL)
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        return Observable.create { observer -> Disposable in
-            let task = self.session?.dataTask(with: request)
-            let taskCompletion = TaskCompletion(taskId: task?.taskIdentifier,
-                                                observer: observer,
-                                                useCache: useCache,
-                                                responseData: Data())
-            self.queue.sync {
-                self.taskCompletions.append(taskCompletion)
-            }
-            task?.resume()
-
-            return Disposables.create {
-                task?.cancel()
-            }
+        let promise = Promise<Data>()
+        let task = self.session?.dataTask(with: request)
+        let taskCompletion = TaskCompletion(taskId: task?.taskIdentifier,
+                                            promise: promise,
+                                            useCache: useCache,
+                                            responseData: Data())
+        self.queue.sync {
+            self.taskCompletions.append(taskCompletion)
         }
+        task?.resume()
+
+        return promise
     }
 
     func invalidateSession() {
@@ -120,10 +117,9 @@ extension SessionManager: URLSessionDataDelegate {
             do {
                 try JSONSerialization.jsonObject(with: taskCompletion.responseData,
                                                  options: .mutableContainers)
-                taskCompletion.observer.on(.next(taskCompletion.responseData))
-                taskCompletion.observer.on(.completed)
+                taskCompletion.promise.fulfill(taskCompletion.responseData)
             } catch {
-                taskCompletion.observer.on(.error(error))
+                taskCompletion.promise.reject(error)
             }
             removeTaskFromQueue(taskCompletion)
             return
@@ -139,7 +135,7 @@ extension SessionManager: URLSessionDataDelegate {
             return
         }
 
-        taskCompletion.observer.on(.error(error))
+        taskCompletion.promise.reject(error)
         removeTaskFromQueue(taskCompletion)
     }
 }

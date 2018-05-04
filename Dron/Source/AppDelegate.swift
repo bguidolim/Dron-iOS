@@ -9,14 +9,13 @@
 import UIKit
 import Fabric
 import Crashlytics
-import RxSwift
+import then
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let apiClient = NordAPIClient()
-    let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -51,9 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Answers.logCustomEvent(withName: "Background Fetch", customAttributes: ["Status": "Started"])
 
-        let serverRequest: Observable<[Server]> = apiClient.request(Server.Resource.getServers)
-        serverRequest
-            .subscribe(onNext: { (servers) in
+        let getServers: Promise<[Server]> = apiClient.request(Server.Resource.getServers)
+        getServers.then { servers in
             if let server = servers.filter({ $0.country == country }).sorted(by: { (obj1, obj2) -> Bool in
                 return obj1.load < obj2.load
             }).first {
@@ -67,9 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Answers.logCustomEvent(withName: "Background Fetch", customAttributes: ["Status": "New Data"])
                 completionHandler(.newData)
             }
-        }, onError: { _ in
+        }.onError { _ in
             Answers.logCustomEvent(withName: "Background Fetch", customAttributes: ["Status": "Failed"])
             completionHandler(.failed)
-        }).disposed(by: disposeBag)
+        }
     }
 }

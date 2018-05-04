@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import RxSwift
 import NetworkExtension
 
 class SettingsInteractor: SettingsInteractorInputProtocol {
@@ -13,16 +12,22 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
     var apiDataManager: SettingsAPIDataManagerInputProtocol?
     var localDatamanager: SettingsLocalDataManagerInputProtocol?
 
-    var disposeBag = DisposeBag()
-
     init() {
-        NotificationCenter.default.rx.notification(Notification.Name.NEVPNStatusDidChange)
-            .subscribe(onNext: { [weak self] notification in
-                guard let obj = notification.object as? NEVPNConnection else {
-                    return
-                }
-                self?.presenter?.connectionStatusReceived(obj.status)
-            }).disposed(by: disposeBag)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.vpnStatusDidChange(_:)),
+                                               name: .NEVPNStatusDidChange,
+                                               object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func vpnStatusDidChange(_ notification: Notification) {
+        guard let obj = notification.object as? NEVPNConnection else {
+            return
+        }
+        presenter?.connectionStatusReceived(obj.status)
     }
 
     func getCurrentSettings() -> SettingsItem {
@@ -35,7 +40,7 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
             return
         }
 
-        apiDataManager?.getServers().subscribe(onNext: { servers in
+        apiDataManager?.getServers().then { servers in
             let array = servers.compactMap({ Country(flag: $0.flag, country: $0.country) })
             let countries = Array(Set<Country>(array)).sorted(by: { (obj1, obj2) -> Bool in
                 return obj1.country < obj2.country
@@ -45,10 +50,10 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
             DispatchQueue.main.async {
                 self.presenter?.countryListReceived(countries)
             }
-        }, onError: { error in
+        }.onError { error in
             // TODO
             print(error.localizedDescription)
-        }).disposed(by: disposeBag)
+        }
     }
 
     func getVPNCurrentStatus() -> NEVPNStatus {
@@ -60,14 +65,19 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
             return
         }
         localDatamanager?.saveSettings(settings)
-        apiDataManager?.getServers().subscribe(onNext: { servers in
-            if let bestServer = servers.filter({ $0.country == country }).sorted(by: { (obj1, obj2) -> Bool in
-                return obj1.load < obj2.load
-            }).first {
+        apiDataManager?.getServers().then { servers in
+            if let bestServer = servers
+                .filter({ $0.country == country })
+                .sorted(by: { (obj1, obj2) -> Bool in
+                    return obj1.load < obj2.load
+                }).first {
                 VPN.manager.connectToBestServer(bestServer,
                                                 killSwitchEnabled: settings.killSwitch)
             }
-        }).disposed(by: disposeBag)
+        }.onError { error in
+            // TODO
+            print(error.localizedDescription)
+        }
     }
 
     func disconnectVPN() {

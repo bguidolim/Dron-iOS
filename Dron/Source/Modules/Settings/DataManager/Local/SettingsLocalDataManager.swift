@@ -5,7 +5,6 @@
 
 import Foundation
 import Default
-import RxSwift
 
 private struct CountryList: Codable {
     let countries: [Country]
