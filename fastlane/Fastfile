@@ -1,8 +1,9 @@
 default_platform(:ios)
+fastlane_version('2.94.0')
 
 platform :ios do
   before_all do
-    xcversion(version: '9.3')
+    xcversion(version: '~> 9.3')
     ensure_git_status_clean
   end
 
@@ -11,8 +12,8 @@ platform :ios do
     reset_git_repo(force: true)
   end
 
-  desc 'Build and deploy to Crashlytics Beta'
-  lane :alpha do
+  desc 'Build and deploy to TestFlight for Beta Testing'
+  lane :beta do
     carthage(
       platform: 'iOS',
       cache_builds: true
@@ -33,8 +34,11 @@ platform :ios do
       glob: '/Dron/**/*.appiconset/*.{png,PNG}'
     )
     gym
-    crashlytics(
-      groups: 'ios-beta'
+    pilot
+    download_dsyms(
+      version: get_version_number,
+      build_number: get_build_number
     )
+    upload_symbols_to_crashlytics
   end
 end

@@ -1,4 +1,5 @@
 excluded:
  - Carthage
+ - .bundle
 identifier_name:
   excluded: id

@@ -1,2 +1,3 @@
 git_url("git@bitbucket.org:bguidolim/match-assets.git")
 type("appstore")
+clone_branch_directly(true)
