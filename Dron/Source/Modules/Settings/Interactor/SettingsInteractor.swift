@@ -65,18 +65,15 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
             return
         }
         localDatamanager?.saveSettings(settings)
-        apiDataManager?.getServers().then { servers in
-            if let bestServer = servers
-                .filter({ $0.country == country })
-                .sorted(by: { (obj1, obj2) -> Bool in
-                    return obj1.load < obj2.load
-                }).first {
-                VPN.manager.connectToBestServer(bestServer,
-                                                killSwitchEnabled: settings.killSwitch)
+        VPN.manager.connect(to: country,
+                            configureKillSwitch: settings.killSwitch)
+            .then { value in
+                // TODO
+                print("Connect Result: \(value)")
             }
-        }.onError { error in
-            // TODO
-            print(error.localizedDescription)
+            .onError { error in
+                // TODO
+                print(error.localizedDescription)
         }
     }
 
