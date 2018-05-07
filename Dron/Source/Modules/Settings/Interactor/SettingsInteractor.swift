@@ -27,7 +27,7 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
         guard let obj = notification.object as? NEVPNConnection else {
             return
         }
-        presenter?.connectionStatusReceived(obj.status)
+        self.presenter?.connectionStatusReceived(obj.status)
     }
 
     func getCurrentSettings() -> SettingsItem {
@@ -64,12 +64,10 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
         guard let country = settings.country else {
             return
         }
-        localDatamanager?.saveSettings(settings)
         VPN.manager.connect(to: country,
                             configureKillSwitch: settings.killSwitch)
-            .then { value in
-                // TODO
-                print("Connect Result: \(value)")
+            .then { [weak self] _ in
+                self?.localDatamanager?.saveSettings(settings)
             }
             .onError { error in
                 // TODO
@@ -78,6 +76,6 @@ class SettingsInteractor: SettingsInteractorInputProtocol {
     }
 
     func disconnectVPN() {
-        VPN.manager.disconnect()
+        _ = VPN.manager.disconnect()
     }
 }

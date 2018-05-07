@@ -25,21 +25,31 @@ final class VPN {
         return vpnManager.connection.status
     }
     var currentServer: String? {
-        get {
-            return UserDefaults.standard.string(forKey: DefaultKeys.CurrentServer)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: DefaultKeys.CurrentServer)
+        didSet {
+            UserDefaults.standard.set(currentServer, forKey: DefaultKeys.CurrentServer)
         }
     }
-    private var isConnecting = false
-    private let vpnManager = NEVPNManager.shared()
+    private var vpnManager = NEVPNManager.shared()
     private let apiClient = NordAPIClient()
 
     // MARK: - Init & Deinit
 
     init() {
         vpnManager.localizedDescription = "Dron"
+        currentServer = UserDefaults.standard.string(forKey: DefaultKeys.CurrentServer)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.vpnStatusDidChange(_:)),
+                                               name: .NEVPNStatusDidChange,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.loadVPNConfig),
+                                               name: .UIApplicationDidBecomeActive,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.loadVPNConfig),
+                                               name: .NEVPNConfigurationChange,
+                                               object: nil)
     }
 
     deinit {
@@ -47,20 +57,6 @@ final class VPN {
     }
 
     // MARK: - Public methods
-
-    func start() {
-        load()
-            .then { _ in
-                NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(self.vpnStatusDidChange(_:)),
-                                                       name: .NEVPNStatusDidChange,
-                                                       object: nil)
-            }
-            .onError { error in
-                // TODO
-                print(error.localizedDescription)
-        }
-    }
 
     func connect(to country: String,
                  configureKillSwitch: Bool = false) -> Promise<Any?> {
@@ -78,62 +74,45 @@ final class VPN {
                         return
                 }
 
-                let configuration = NEVPNProtocolIKEv2()
-                configuration.remoteIdentifier = server.domain
-                configuration.localIdentifier = server.name
-                configuration.serverAddress = server.ipAddress
-                configuration.username = KeychainManager.username()
-                configuration.passwordReference = KeychainManager.passwordRef()
-                configuration.useExtendedAuthentication = true
-                configuration.disconnectOnSleep = false
-                self.vpnManager.protocolConfiguration = configuration
-                self.vpnManager.isEnabled = true
-                self.configureKillSwitch(enabled: configureKillSwitch)
+                if let currentServer = self.currentServer, currentServer == server.domain {
+                    promise.reject(VPNError.alreadyConnectedToServer)
+                    return
+                }
 
-                self.load()
-                    .validate(withError: VPNError.alreadyConnectedToServer, { [weak self] _ -> Bool in
-                        guard let currentServer = self?.currentServer else {
-                            return true
-                        }
-                        return currentServer != server.domain
-                    })
+                self.disconnectIfNeeded()
+                    .then { [weak self] _ in
+                        self?.vpnManager.protocolConfiguration = self?.setupProtocol(with: server)
+                        self?.vpnManager.isEnabled = true
+                        self?.configureKillSwitch(enabled: configureKillSwitch)
+                    }
                     .then(self.save())
                     .then(self.connect())
+                    .then { [weak self] _ in
+                        self?.currentServer = server.domain
+                        promise.fulfill(nil)
+                    }
                     .onError { error in
                         promise.reject(error)
-                    }
-                    .finally {
-                        UserDefaults.standard.set(server.domain,
-                                                  forKey: DefaultKeys.CurrentServer)
-                        promise.fulfill(nil)
                 }
         }
 
         return promise
     }
 
-    func disconnect() {
-        isConnecting = false
+    func disconnect() -> Promise<Any?> {
+        vpnManager.connection.stopVPNTunnel()
+        currentServer = nil
         configureKillSwitch(enabled: false)
-        save().finally { [weak self] in
-            self?.vpnManager.connection.stopVPNTunnel()
-            self?.currentServer = nil
+
+        let promise = Promise<Any?>()
+        save()
+            .then { _ in
+                promise.fulfill(nil)
+            }
+            .onError { error in
+                promise.reject(error)
         }
-    }
-
-    func configureKillSwitch(enabled: Bool) {
-        vpnManager.isOnDemandEnabled = enabled
-        if enabled {
-            let wifiRule = NEOnDemandRuleConnect()
-            wifiRule.interfaceTypeMatch = .wiFi
-
-            let cellularRule = NEOnDemandRuleConnect()
-            cellularRule.interfaceTypeMatch = .cellular
-
-            vpnManager.onDemandRules = [wifiRule, cellularRule]
-        } else {
-            vpnManager.onDemandRules = nil
-        }
+        return promise
     }
 
     // MARK: - Private methods
@@ -143,6 +122,7 @@ final class VPN {
             return
         }
 
+        #if DEBUG
         var status: String
         switch obj.status {
         case .connected:
@@ -159,11 +139,38 @@ final class VPN {
             status = "Reasserting"
         }
         print("VPN Status: \(status)")
+        #endif
+    }
 
-        if obj.status == .disconnected {
-            if self.isConnecting {
-                try? obj.startVPNTunnel()
-            }
+    @objc private func loadVPNConfig() {
+        _ = load()
+    }
+
+    private func setupProtocol(with server: Server) -> NEVPNProtocolIKEv2 {
+        let configuration = NEVPNProtocolIKEv2()
+        configuration.remoteIdentifier = server.domain
+        configuration.localIdentifier = server.name
+        configuration.serverAddress = server.ipAddress
+        configuration.username = KeychainManager.username()
+        configuration.passwordReference = KeychainManager.passwordRef()
+        configuration.useExtendedAuthentication = true
+        configuration.disconnectOnSleep = false
+
+        return configuration
+    }
+
+    private func configureKillSwitch(enabled: Bool) {
+        vpnManager.isOnDemandEnabled = enabled
+        if enabled {
+            let wifiRule = NEOnDemandRuleConnect()
+            wifiRule.interfaceTypeMatch = .wiFi
+
+            let cellularRule = NEOnDemandRuleConnect()
+            cellularRule.interfaceTypeMatch = .cellular
+
+            vpnManager.onDemandRules = [wifiRule, cellularRule]
+        } else {
+            vpnManager.onDemandRules = nil
         }
     }
 
@@ -192,15 +199,19 @@ final class VPN {
     }
 
     private func connect() -> Promise<Any?> {
-        if vpnManager.connection.status == .connected {
-            self.disconnect()
-        }
         let promise = Promise<Any?>()
         do {
-            promise.fulfill(try vpnManager.connection.startVPNTunnel())
+            promise.fulfill(try self.vpnManager.connection.startVPNTunnel())
         } catch {
             promise.reject(error)
         }
         return promise
+    }
+
+    private func disconnectIfNeeded() -> Promise<Any?> {
+        if vpnManager.connection.status == .connected {
+            return disconnect()
+        }
+        return Promise.resolve(nil)
     }
 }

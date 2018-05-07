@@ -97,8 +97,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
 
     func setConnectionStatus(text: String, value: Bool) {
         connectRow.cell.titleLabel.text = text
-        connectRow.switched = value
-        connectRow.update()
+        connectRow.cell.switchButton.isOn = value
     }
 
     func setSelectedCountry(_ country: String) {

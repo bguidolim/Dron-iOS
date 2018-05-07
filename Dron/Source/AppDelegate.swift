@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
 
-        VPN.manager.start()
         UIApplication.shared.setMinimumBackgroundFetchInterval(30)
 
         guard let settingsViewController = SettingsWireframe.configureViewController() else {
@@ -51,7 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        VPN.manager.connect(to: country,
+        #if DEBUG
+        let debugCountry = country == "Germany" ? "Brazil" : "Germany"
+        #else
+        let debugCountry = country
+        #endif
+
+        print("Connecting to: \(debugCountry)")
+
+        VPN.manager.connect(to: debugCountry,
                             configureKillSwitch: currentSettings.killSwitch)
             .then { _ in
                 completionHandler(.newData)
