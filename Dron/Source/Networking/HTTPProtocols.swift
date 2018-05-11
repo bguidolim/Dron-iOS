@@ -53,14 +53,18 @@ public extension HTTPClient {
     public func request<R: HTTPResource, T: Decodable>(_ resource: R) -> Promise<T> {
         let target = HTTPTarget(baseURL: baseURL, resource: resource)
         let promise = Promise<T>()
-        request(target).then { data in
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            do {
-                promise.fulfill(try decoder.decode(T.self, from: data))
-            } catch {
-                promise.reject(error)
+        request(target)
+            .then { data in
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                do {
+                    promise.fulfill(try decoder.decode(T.self, from: data))
+                } catch {
+                    promise.reject(error)
+                }
             }
+            .onError { error in
+                promise.reject(error)
         }
         return promise
     }

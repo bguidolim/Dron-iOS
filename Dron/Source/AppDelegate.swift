@@ -9,13 +9,11 @@
 import UIKit
 import Fabric
 import Crashlytics
-import then
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let apiClient = NordAPIClient()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -36,39 +34,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication,
-                     performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
-        if VPN.manager.status == .disconnected {
-            completionHandler(.noData)
-            return
-        }
-
-        let currentSettings = SettingsLocalDataManager().getSettings()
-        guard let country = currentSettings.country else {
-            completionHandler(.failed)
-            return
-        }
-
-        #if DEBUG
-        let debugCountry = country == "Germany" ? "Brazil" : "Germany"
-        #else
-        let debugCountry = country
-        #endif
-
-        print("Connecting to: \(debugCountry)")
-
-        VPN.manager.connect(to: debugCountry,
-                            configureKillSwitch: currentSettings.killSwitch)
-            .then { _ in
-                completionHandler(.newData)
-            }
-            .onError { error in
-                if case VPNError.alreadyConnectedToServer = error {
-                    completionHandler(.noData)
-                } else {
-                    completionHandler(.failed)
-                }
-        }
-    }
+//    func application(_ application: UIApplication,
+//                     performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//
+//        if VPN.manager.status == .disconnected {
+//            completionHandler(.noData)
+//            return
+//        }
+//
+//        let currentSettings = SettingsLocalDataManager().getSettings()
+//        guard let country = currentSettings.country else {
+//            completionHandler(.failed)
+//            return
+//        }
+//
+//        VPN.manager.connect(to: debugCountry,
+//                            configureKillSwitch: currentSettings.killSwitch)
+//            .then { _ in
+//                completionHandler(.newData)
+//            }
+//            .onError { error in
+//                if case VPNError.alreadyConnectedToServer = error {
+//                    completionHandler(.noData)
+//                } else {
+//                    completionHandler(.failed)
+//                }
+//        }
+//    }
 }
