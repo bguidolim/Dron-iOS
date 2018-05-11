@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
 
-        UIApplication.shared.setMinimumBackgroundFetchInterval(30)
+        //UIApplication.shared.setMinimumBackgroundFetchInterval(30)
 
         guard let settingsViewController = SettingsWireframe.configureViewController() else {
             return false

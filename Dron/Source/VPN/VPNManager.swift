@@ -177,11 +177,7 @@ final class VPN {
         let configuration = NEVPNProtocolIKEv2()
         configuration.remoteIdentifier = server.domain
         configuration.localIdentifier = server.name
-        #if DEBUG
         configuration.serverAddress = server.domain
-        #else
-        configuration.serverAddress = server.ipAddress
-        #endif
         configuration.username = KeychainManager.username()
         configuration.passwordReference = KeychainManager.passwordRef()
         configuration.useExtendedAuthentication = true
