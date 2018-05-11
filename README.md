@@ -12,9 +12,7 @@ Lightweight alternative to connect on NordVPN servers on iOS
 
 ## Beta Testing
 
-Receive new builds via TestFlight. Sign in [here](https://dron-onboarding.herokuapp.com).
-
-Password: `dron-ios`
+Receive new builds via TestFlight. Sign in [here](https://dron-onboarding.herokuapp.com/?token=dron-ios).
 
 ## Credits
 
