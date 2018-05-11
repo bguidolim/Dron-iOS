@@ -10,6 +10,7 @@
 		37011C3A208375DA00079A6C /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37011C39208375DA00079A6C /* VPNManager.swift */; };
 		37011C432083778D00079A6C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37011C422083778D00079A6C /* NetworkExtension.framework */; };
 		37011C632083821200079A6C /* Former.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37011C622083821200079A6C /* Former.framework */; };
+		37127AAA209CDDD7002C6B50 /* then.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37127AA9209CDDD7002C6B50 /* then.framework */; };
 		371D89A62099FD3000923FD0 /* SettingsLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89952099FD3000923FD0 /* SettingsLocalDataManager.swift */; };
 		371D89A72099FD3000923FD0 /* SettingsAPIDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89972099FD3000923FD0 /* SettingsAPIDataManager.swift */; };
 		371D89A82099FD3000923FD0 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D89992099FD3000923FD0 /* SettingsPresenter.swift */; };
@@ -32,8 +33,6 @@
 		373E9DD420835553008067C5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373E9DD320835553008067C5 /* CoreLocation.framework */; };
 		37626C00209668E50033AB57 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37626BFF209668E50033AB57 /* KeychainAccess.framework */; };
 		37626C03209669540033AB57 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37626C02209669540033AB57 /* KeychainManager.swift */; };
-		37E3E8ED2090BB440041A6D6 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E8EB2090BB430041A6D6 /* RxSwift.framework */; };
-		37E3E8EE2090BB440041A6D6 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E8EC2090BB430041A6D6 /* RxCocoa.framework */; };
 		37E3E9222095D2060041A6D6 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3E9212095D2060041A6D6 /* String+Extensions.swift */; };
 		37E3E9242095D4EB0041A6D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E3E9232095D4EB0041A6D6 /* Localizable.strings */; };
 		37E3E9262095E2B80041A6D6 /* Default.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E3E9252095E2B80041A6D6 /* Default.framework */; };
@@ -44,6 +43,7 @@
 		37011C3F2083772200079A6C /* Dron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dron.entitlements; sourceTree = "<group>"; };
 		37011C422083778D00079A6C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		37011C622083821200079A6C /* Former.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Former.framework; path = Carthage/Build/iOS/Former.framework; sourceTree = SOURCE_ROOT; };
+		37127AA9209CDDD7002C6B50 /* then.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = then.framework; path = Carthage/Build/iOS/then.framework; sourceTree = SOURCE_ROOT; };
 		371D89952099FD3000923FD0 /* SettingsLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLocalDataManager.swift; sourceTree = "<group>"; };
 		371D89972099FD3000923FD0 /* SettingsAPIDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAPIDataManager.swift; sourceTree = "<group>"; };
 		371D89992099FD3000923FD0 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -68,8 +68,6 @@
 		373E9DD320835553008067C5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		37626BFF209668E50033AB57 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = SOURCE_ROOT; };
 		37626C02209669540033AB57 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		37E3E8EB2090BB430041A6D6 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = SOURCE_ROOT; };
-		37E3E8EC2090BB430041A6D6 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = SOURCE_ROOT; };
 		37E3E9212095D2060041A6D6 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		37E3E9232095D4EB0041A6D6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		37E3E9252095E2B80041A6D6 /* Default.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Default.framework; path = Carthage/Build/iOS/Default.framework; sourceTree = SOURCE_ROOT; };
@@ -81,10 +79,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				373E9DD420835553008067C5 /* CoreLocation.framework in Frameworks */,
+				37127AAA209CDDD7002C6B50 /* then.framework in Frameworks */,
 				37011C432083778D00079A6C /* NetworkExtension.framework in Frameworks */,
 				37E3E9262095E2B80041A6D6 /* Default.framework in Frameworks */,
-				37E3E8EE2090BB440041A6D6 /* RxCocoa.framework in Frameworks */,
-				37E3E8ED2090BB440041A6D6 /* RxSwift.framework in Frameworks */,
 				37011C632083821200079A6C /* Former.framework in Frameworks */,
 				37626C00209668E50033AB57 /* KeychainAccess.framework in Frameworks */,
 				373E9DB420816311008067C5 /* Crashlytics.framework in Frameworks */,
@@ -241,10 +238,9 @@
 		373E9DA520815F4E008067C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37127AA9209CDDD7002C6B50 /* then.framework */,
 				37626BFF209668E50033AB57 /* KeychainAccess.framework */,
 				37E3E9252095E2B80041A6D6 /* Default.framework */,
-				37E3E8EC2090BB430041A6D6 /* RxCocoa.framework */,
-				37E3E8EB2090BB430041A6D6 /* RxSwift.framework */,
 				37011C622083821200079A6C /* Former.framework */,
 				37011C422083778D00079A6C /* NetworkExtension.framework */,
 				373E9DD320835553008067C5 /* CoreLocation.framework */,
@@ -388,17 +384,15 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/then.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Former.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Default.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			name = Carthage;
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/then.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Former.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Default.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainAccess.framework",
 			);

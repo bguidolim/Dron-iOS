@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import RxSwift
 
 struct SettingsItem {
     let username: String?

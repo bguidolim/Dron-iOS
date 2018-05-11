@@ -5,7 +5,7 @@
 
 import Foundation
 import UIKit
-import RxSwift
+import then
 import NetworkExtension
 
 protocol SettingsViewProtocol: class {
@@ -50,7 +50,7 @@ protocol SettingsInteractorInputProtocol: class {
 }
 
 protocol SettingsAPIDataManagerInputProtocol: class {
-    func getServers() -> Observable<[Server]>
+    func getServers() -> Promise<[Server]>
 }
 
 protocol SettingsLocalDataManagerInputProtocol: class {

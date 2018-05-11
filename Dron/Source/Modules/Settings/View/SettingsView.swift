@@ -4,7 +4,6 @@
 //
 
 import Former
-import RxSwift
 
 final class SettingsView: FormViewController, SettingsViewProtocol {
 
@@ -15,8 +14,6 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
     private let passwordRow = TextFieldRowFormer<FormTextFieldCell>()
     private let countrySelectorRow = LabelRowFormer<FormLabelCell>()
     private let killSwitchRow = SwitchRowFormer<FormSwitchCell>()
-
-    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,8 +97,7 @@ final class SettingsView: FormViewController, SettingsViewProtocol {
 
     func setConnectionStatus(text: String, value: Bool) {
         connectRow.cell.titleLabel.text = text
-        connectRow.switched = value
-        connectRow.update()
+        connectRow.cell.switchButton.isOn = value
     }
 
     func setSelectedCountry(_ country: String) {

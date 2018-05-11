@@ -18,6 +18,7 @@ public struct Server: Codable {
     let country: String
     let location: Location
     let load: Double
+    let features: Features
 }
 
 extension Server {
@@ -36,6 +37,10 @@ extension Server {
 struct Location: Codable {
     let lat: Double
     let long: Double
+}
+
+struct Features: Codable {
+    let ikev2: Bool
 }
 
 struct Country: Codable, Hashable {

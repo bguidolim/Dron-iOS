@@ -4,7 +4,7 @@
 Lightweight alternative to connect on NordVPN servers on iOS
 
 ## Requirements
-- [RxSwift](https://github.com/ReactiveX/RxSwift)
+- [then](https://github.com/freshOS/then)
 - [Former](https://github.com/ra1028/Former)
 - [Default](https://github.com/Nirma/Default)
 - [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
