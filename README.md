@@ -10,6 +10,12 @@ Lightweight alternative to connect on NordVPN servers on iOS
 - [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
 - [Carthage](https://github.com/Carthage/Carthage)
 
+## Beta Testing
+
+Receive new builds via TestFlight. Sign in [here](https://dron-onboarding.herokuapp.com).
+
+Password: `dron-ios`
+
 ## Credits
 
 - Bruno Guidolim [**@bguidolim**](https://twitter.com/bguidolim).
